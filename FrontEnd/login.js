@@ -1,8 +1,13 @@
 const form = document.getElementById("logIn")
 form.addEventListener('submit', (e) => {
     e.preventDefault()
+    
     const email = document.getElementById('email').value
     const password = document.getElementById('pass').value
+    if( !email || !password ) {
+        let errorText = document.querySelector(".errorMessage")
+        return errorText.innerHTML = "Identifiants manquants !"
+    }
 
     const data = {
         email: email, 

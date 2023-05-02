@@ -124,6 +124,7 @@ const fetchAllWorks = function() {
         }
     })
     .then(function(value) {
+        console.log(value)
         modalGallery.innerHTML = ''
     value.forEach((items ) => {
             let modalFigure = document.createElement("figure")
@@ -245,7 +246,7 @@ const openModal2 = function (e) {
     buttonArrowModal2.innerHTML = '<i class="fa-solid fa-arrow-left"></i>'
     buttonArrowModal2.classList.add("arrow_button")
 
-    modalForm.innerHTML = '<div class="addPicture_container"><i class="fa-regular fa-image addPicture_icon"></i><label for="uploadPictureButton" class="addPicture_button">+ Ajouter photo</label><input type="file" class="upload" id="uploadPictureButton" name="image" accept=".png, .jpg, .jpeg" style="opacity: 0;"/><p class="addPicture_text">jpg, png : 4mo max</p></div><label class="modal2_formLabel">Titre</label><input class="modal2_formInpute" id="formTitle" type="text" name="title" required><label class="modal2_formLabel">Catégorie</label><select id="formCategory" class="modal2_formInpute" name="category" type="select" required><option value="" selected disabled></option><option value="1">Objets</option><option value="2">Appartements</option><option value="3">Hôtels & restaurants</option></select><div class="errorMessage"></div><input class="validate_button" type="submit" value="Valider" />'
+    modalForm.innerHTML = '<div class="addPicture_container"><i class="fa-regular fa-image addPicture_icon"></i><label for="uploadPictureButton" class="addPicture_button">+ Ajouter photo</label><input type="file" class="upload" id="uploadPictureButton" name="image" accept=".png, .jpg, .jpeg" style="opacity: 0;"/><p class="addPicture_text">jpg, png : 4mo max</p></div><label class="modal2_formLabel">Titre</label><input class="modal2_formInpute" id="formTitle" type="text" name="title" required><label class="modal2_formLabel">Catégorie</label><select id="formCategory" class="modal2_formInpute" name="category" type="select" required><option value="" selected disabled></option><option value="1">Objets</option><option value="2">Appartements</option><option value="3">Hôtels & restaurants</option></select><div class="errorMessage"></div><input class="validate_button" id="valid_button" type="submit" value="Valider" />'
     modalForm.classList.add('modal2_form')
 
     modalLigne.classList.add('ligne2')
@@ -286,6 +287,7 @@ var fileTypes = [
   ]
   
 function validFileType(file) {
+    
 for(var i = 0; i < fileTypes.length; i++) {
     console.log(fileTypes)
     if(file.type === fileTypes[i]) {
@@ -296,7 +298,54 @@ for(var i = 0; i < fileTypes.length; i++) {
 return false
 }
 
+// Récupération des éléments HTML
+let imgValid = document.getElementById("uploadPictureButton");
+let titleValid = document.getElementById("formTitle");
+let projectValid = document.getElementById("formCategory");
+let buttonValider = document.getElementById("valid_button");
+
+uploadPictureButton.addEventListener('change',(even)=>{
+    even.preventDefault();
+    if (uploadPictureButton.value !== "") {
+        imgValid = true;
+    }else{
+        imgValid = false;
+    }
+    activeButtonValide(imgValid, titleValid, projectValid)
+})
+
+
+formTitle.addEventListener('input',(even)=>{
+    even.preventDefault();
+    if (formTitle.value !== "") {
+        titleValid = true;
+    }else{
+        titleValid = false;
+    }
+    activeButtonValide(imgValid, titleValid, projectValid)
+})
+
+formCategory.addEventListener('input',(even)=>{
+    even.preventDefault();
+    if (formCategory.value !== "") {
+        projectValid = true;
+    }else{
+        projectValid = false;
+    }
+    activeButtonValide(imgValid, titleValid, projectValid)
+})
+
+ function activeButtonValide(imgValid, titleValid, projectValid){
+  if (imgValid == true && titleValid == true && projectValid == true ) {
+    console.log(imgValid)
+    buttonValider.classList.add('button_green')
+  } else {
+    buttonValider.classList.add('button_grey')
+  }
+};
 }
+
+
 
 newPictureButton.addEventListener('click', (openModal2))
 
