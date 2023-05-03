@@ -342,7 +342,6 @@ formCategory.addEventListener('input',(even)=>{
   if (imgValid === true && titleValid === true && projectValid === true ) {
     buttonValider.classList.add('button_green')
   } else {
-    console.log('false')
     buttonValider.classList.remove('button_green')
   }
 };
@@ -390,6 +389,7 @@ modalForm.addEventListener('submit', (e) => {
         },
         body: form
     }).then(res => {
+        console.log(res)
         if (res.ok) {
             return res.json()
         } else if (res.status === 400) {
