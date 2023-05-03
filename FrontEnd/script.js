@@ -321,6 +321,7 @@ formTitle.addEventListener('input',(even)=>{
         titleValid = true;
     }else{
         titleValid = false;
+        activeButtonValide(imgValid, titleValid, projectValid)
     }
     activeButtonValide(imgValid, titleValid, projectValid)
 })
@@ -329,6 +330,7 @@ formCategory.addEventListener('input',(even)=>{
     even.preventDefault();
     if (formCategory.value !== "") {
         projectValid = true;
+        
     }else{
         projectValid = false;
     }
@@ -336,11 +338,12 @@ formCategory.addEventListener('input',(even)=>{
 })
 
  function activeButtonValide(imgValid, titleValid, projectValid){
-  if (imgValid == true && titleValid == true && projectValid == true ) {
-    console.log(imgValid)
+    console.log('test')
+  if (imgValid === true && titleValid === true && projectValid === true ) {
     buttonValider.classList.add('button_green')
   } else {
-    buttonValider.classList.add('button_grey')
+    console.log('false')
+    buttonValider.classList.remove('button_green')
   }
 };
 }
